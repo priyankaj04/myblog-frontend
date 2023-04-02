@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NavBar from './navbar';
 import { ToastContainer, toast } from 'react-toastify';
+import { LoginUser } from './api'
 import 'react-toastify/dist/ReactToastify.css';
 import './global.css'
 
@@ -22,9 +23,23 @@ function Login() {
         }
 
         if (email && password) { 
-            toast.success("Login Successful");
-            toast("Welcome to Reader's Blog.", {
-                autoClose: 5000,
+            const reqbody = {
+                email: email,
+                password: password
+            }
+            LoginUser(reqbody).then((res) => {
+                if (res.status) {
+                    toast.success("Login Successful");
+                    toast("Welcome to Reader's Blog.", {
+                        autoClose: 5000,
+                    })
+                    sessionStorage.setItem("token", res.data.accesstoken);
+                    sessionStorage.setItem("email", res.data.email);
+                    sessionStorage.setItem("username", res.data.name);
+                    sessionStorage.setItem("userid", res.data.id);
+                } else {
+                    toast.error(res.message);
+                }
             })
         }
     }

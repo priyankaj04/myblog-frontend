@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './global.css';
 import { useNavigate } from "react-router-dom";
-import { createNewUser, getAllBlogs, demoblogs } from './api'
+import { createNewUser } from './api'
 
 function Signup() {
   const [showpas, setShowpas] = useState(false);
@@ -45,17 +45,14 @@ function Signup() {
         name: username, 
         password: confirmpas
       }
-      // createNewUser(reqbody).then((res) => {
-      //   if (res.status) {
-      //     console.log(res.data);
-      //     toast.info("Registration is Successful. Now Login with registred email and password.");
-      //     navigate('/login')
-      //   } else {
-      //     toast.error(res.message);
-      //   }
-      // })
-      //sessionStorage.setItem("staffid", res.staffid);
-      demoblogs().then(res => console.log(res))
+      createNewUser(reqbody).then((res) => {
+        if (res.status) {
+          toast.info("Registration is Successful. Now Login with registred email and password.");
+          setTimeout(navigate('/login'), 5000);
+        } else {
+          toast.error(res.message);
+        }
+      })
     }
   }
 

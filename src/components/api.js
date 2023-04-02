@@ -49,7 +49,7 @@ export const LoginUser = (reqbody) => {
 //register- username, email, password
 export const createNewUser = (reqbody) => {
 
-    let url = process.env.REACT_APP_APIURL + '/user/create'
+    let url = process.env.REACT_APP_APIURL + 'user/create'
 
     const fetchOptions = {
         method: "POST",
@@ -349,27 +349,4 @@ export const deleteCommentByCommentid = (commentid) => {
             console.log('error', error)
             return { status: 0, msg: error.message }
         });
-}
-
-export const demoblogs = async () => {
-    let headersList = {
-        "Accept": "*/*",
-        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-        "Content-Type": "application/json"
-    }
-
-    let bodyContent = JSON.stringify({
-        "email": "priyanka@gmail.com",
-        "name": "priyanka",
-        "password": "123"
-    });
-
-    let response = await fetch("http://localhost:5003/api/blog", {
-        method: "GET",
-        body: bodyContent,
-        headers: headersList
-    });
-
-    let data = await response.json();
-    console.log(data);
 }
