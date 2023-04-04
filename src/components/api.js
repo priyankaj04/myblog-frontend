@@ -115,7 +115,7 @@ export const deleteUserById = (id) => {
 //get all blogs
 export const getAllBlogs = () => {
 
-    const url = process.env.REACT_APP_APIURL + '/blog';
+    const url = process.env.REACT_APP_APIURL + 'blogs';
     const fetchOptions = {
         method: "GET",
         headers: {
@@ -225,7 +225,7 @@ export const CreateNewBlog = (reqbody) => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": 'Bearer' + JWT,
+            "Authorization": 'Bearer ' + JWT,
         },
         body: JSON.stringify(reqbody)
     };
